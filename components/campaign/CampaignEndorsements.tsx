@@ -21,7 +21,14 @@ export default function CampaignEndorsements({ endorsements }: CampaignEndorseme
               <p className="text-sm leading-relaxed text-soft">&ldquo;{entry?.quote || 'Endorsement quote'}&rdquo;</p>
               <div className="mt-4 flex items-center gap-3">
                 {photo.src ? (
-                  <Image alt={photo.alt} className="h-11 w-11 rounded-full object-cover" height={44} src={photo.src} width={44} />
+                  <Image
+                    alt={photo.alt}
+                    className="h-11 w-11 rounded-full object-cover"
+                    height={44}
+                    src={photo.src}
+                    style={{ transform: `rotate(${photo.rotation}deg)` }}
+                    width={44}
+                  />
                 ) : (
                   <div aria-hidden="true" className="h-11 w-11 rounded-full bg-slate-300/70" />
                 )}

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import type { CampaignData } from '../../lib/cms'
 import { resolveMedia } from '../../lib/cms'
 import CampaignCTA from './CampaignCTA'
@@ -25,36 +24,46 @@ function formatElectionDate(value?: string): string {
 export default function CampaignHero({ campaignInfo, hero, cta }: CampaignHeroProps) {
   const heroImage = resolveMedia(hero?.heroImage, `${campaignInfo?.candidateName || 'Candidate'} campaign portrait`)
   const electionDate = formatElectionDate(campaignInfo?.electionDate)
+  const hasRotation = heroImage.rotation !== 0
+
+  const infoItems = [
+    { label: 'Candidate', value: campaignInfo?.candidateName || 'Candidate Name', icon: 'CN' },
+    { label: 'Office', value: campaignInfo?.officeTitle || 'Office Sought', icon: 'OF' },
+    { label: 'Election Date', value: electionDate || 'TBD', icon: 'ED' },
+    { label: 'Organization', value: campaignInfo?.organizationName || 'Law Student Association', icon: 'OR' },
+  ]
 
   return (
-    <section className="section grid gap-8 lg:grid-cols-[1.1fr_0.9fr]" id="hero">
-      <div>
+    <section className="section grid gap-8 py-8 md:py-9 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16" id="hero">
+      <div className="max-w-[38.5rem]">
         <p className="eyebrow">{hero?.heroBadge || 'Student Election Campaign'}</p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{hero?.heroHeadline || 'Campaign Headline'}</h1>
-        <p className="mt-4 max-w-copy text-lg leading-relaxed text-soft">{hero?.heroSubheadline || 'Campaign subheadline goes here.'}</p>
+        <h1 className="mt-4 max-w-[13.4ch] text-[2.75rem] font-semibold tracking-[-0.03em] leading-[0.97] md:text-[4.25rem]">
+          {hero?.heroHeadline || 'Campaign Headline'}
+        </h1>
+        <p className="mt-6 max-w-[47ch] text-[1.05rem] leading-[1.62] text-soft md:text-[1.18rem]">
+          {hero?.heroSubheadline || 'Campaign subheadline goes here.'}
+        </p>
 
-        <div className="mt-6 grid gap-3 rounded-xl border border-line bg-white/70 p-4 md:grid-cols-2">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-soft">Candidate</p>
-            <p className="mt-1 font-medium">{campaignInfo?.candidateName || 'Candidate Name'}</p>
-          </div>
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-soft">Election Date</p>
-            <p className="mt-1 font-medium">{electionDate || 'TBD'}</p>
-          </div>
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-soft">Office</p>
-            <p className="mt-1 font-medium">{campaignInfo?.officeTitle || 'Office Sought'}</p>
-          </div>
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-soft">Organization</p>
-            <p className="mt-1 font-medium">{campaignInfo?.organizationName || 'Law Student Association'}</p>
+        <div className="mt-7 rounded-2xl border border-line bg-[color:var(--surface-strong)] p-4 md:p-5">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[color:var(--accent)]">Campaign Information</p>
+          <div className="mt-3.5 grid gap-3.5 md:grid-cols-2 md:gap-4">
+            {infoItems.map((item) => (
+              <div className="flex items-start gap-2.5" key={item.label}>
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line bg-white text-[9px] font-mono tracking-[0.08em] text-[color:var(--brand-primary)]">
+                  {item.icon}
+                </span>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-soft">{item.label}</p>
+                  <p className="mt-0.5 text-[1.02rem] font-semibold leading-snug md:text-[1.05rem]">{item.value}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {campaignInfo?.slogan ? <p className="mt-4 text-base font-medium text-[color:var(--accent)]">{campaignInfo.slogan}</p> : null}
+        {campaignInfo?.slogan ? <p className="mt-6 text-[0.98rem] font-semibold text-[color:var(--accent)]">{campaignInfo.slogan}</p> : null}
 
-        <div className="mt-7">
+        <div className="mt-6">
           <CampaignCTA
             primaryHref={cta?.href}
             primaryLabel={cta?.label}
@@ -64,25 +73,38 @@ export default function CampaignHero({ campaignInfo, hero, cta }: CampaignHeroPr
         </div>
       </div>
 
-      <div className="space-y-4">
-        <div className="relative overflow-hidden rounded-2xl border border-line bg-white/80">
+      <div className="self-start lg:-mt-2 lg:self-start">
+        <div className="mx-auto w-full max-w-[22rem] space-y-4 sm:max-w-[24rem] md:space-y-5 lg:max-w-[27rem]">
           {heroImage.src ? (
-            <Image alt={heroImage.alt} className="h-[340px] w-full object-cover" height={760} src={heroImage.src} width={620} />
+            <div className="relative aspect-[9/10] overflow-hidden rounded-2xl border border-line bg-[color:var(--surface-strong)] shadow-sm">
+              <img
+                alt={heroImage.alt}
+                className={`block h-full w-full ${hasRotation ? 'object-contain' : 'object-cover'}`}
+                loading="eager"
+                src={heroImage.src}
+                style={hasRotation ? { transform: `rotate(${heroImage.rotation}deg)` } : undefined}
+              />
+            </div>
           ) : (
-            <div className="flex h-[340px] items-center justify-center bg-slate-200/60 text-sm text-soft">Add hero image in Payload CMS.</div>
+            <div className="flex aspect-[9/10] w-full items-center justify-center rounded-2xl border border-line bg-slate-200/60 text-sm text-soft">
+              Add hero image in Payload CMS.
+            </div>
           )}
-        </div>
 
-        {hero?.heroStats?.length ? (
-          <div className="grid gap-3 sm:grid-cols-3">
-            {hero.heroStats.map((stat, index) => (
-              <div className="rounded-xl border border-line bg-white/75 p-4" key={`${stat?.label}-${index}`}>
-                <p className="text-2xl font-semibold tracking-tight">{stat?.value || '--'}</p>
-                <p className="mt-1 text-sm text-soft">{stat?.label || 'Metric'}</p>
-              </div>
-            ))}
-          </div>
-        ) : null}
+          {hero?.heroStats?.length ? (
+            <div className="grid gap-2.5 min-[560px]:grid-cols-3">
+              {hero.heroStats.map((stat, index) => (
+                <div className="flex min-h-[7.75rem] flex-col justify-between rounded-xl border border-line bg-white p-3.5 shadow-sm min-[560px]:min-h-[8.1rem]" key={`${stat?.label}-${index}`}>
+                  <div className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[color:var(--brand-primary-soft)] text-[10px] font-semibold text-[color:var(--brand-primary)]">
+                    +
+                  </div>
+                  <p className="text-[1.85rem] font-semibold tracking-[-0.02em] leading-tight">{stat?.value || '--'}</p>
+                  <p className="text-[0.95rem] font-medium leading-snug text-soft">{stat?.label || 'Metric'}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
       </div>
     </section>
   )

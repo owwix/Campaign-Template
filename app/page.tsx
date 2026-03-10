@@ -18,7 +18,7 @@ const fallbackData: CampaignData = {
   campaignInfo: {
     candidateName: 'Jordan Ellis',
     officeTitle: 'Law School President',
-    organizationName: 'Blackstone Law Society',
+    organizationName: 'University of the Pacific McGeorge School of Law',
     slogan: 'Practical Leadership. Transparent Advocacy. Student-First Results.',
   },
   hero: {
@@ -69,7 +69,7 @@ export default async function HomePage() {
     console.error(error)
   }
 
-  const accentColor = campaign?.theme?.accentColor || '#9f7a46'
+  const accentColor = campaign?.theme?.accentColor || '#AF8A54'
   const showBanner = campaign?.announcement?.enabled !== false && campaign?.announcement?.text
   const showSectionGradients = campaign?.theme?.showSectionGradients !== false
 
@@ -77,12 +77,16 @@ export default async function HomePage() {
     <>
       <CampaignNav
         candidateName={campaign?.campaignInfo?.candidateName}
+        organizationName={campaign?.campaignInfo?.organizationName}
         officeTitle={campaign?.campaignInfo?.officeTitle}
       />
 
-      <main className="shell space-y-6" style={{ ['--accent' as string]: accentColor }}>
+      <main className="shell space-y-7 md:space-y-8" style={{ ['--accent' as string]: accentColor }}>
         {showBanner ? (
-          <section className="rounded-xl border border-line bg-[color:var(--accent)] px-4 py-3 text-center text-sm font-medium text-white" role="status">
+          <section
+            className="rounded-xl border border-[color:var(--brand-primary)] bg-[color:var(--brand-primary)] px-5 py-3.5 text-center text-sm font-semibold text-white shadow-sm"
+            role="status"
+          >
             {campaign.announcement?.text}
           </section>
         ) : null}
@@ -95,9 +99,9 @@ export default async function HomePage() {
             showSectionGradients
               ? {
                   background:
-                    'linear-gradient(180deg, rgba(159,122,70,0.08) 0%, rgba(244,241,234,0) 28%, rgba(26,39,51,0.05) 100%)',
+                    'linear-gradient(180deg, rgba(104,35,52,0.07) 0%, rgba(244,241,238,0) 30%, rgba(175,138,84,0.1) 100%)',
                   borderRadius: '1rem',
-                  padding: '0.25rem',
+                  padding: '0.35rem',
                 }
               : undefined
           }
@@ -114,6 +118,7 @@ export default async function HomePage() {
 
       <CampaignFooter
         candidateName={campaign?.campaignInfo?.candidateName}
+        footerCopyright={campaign?.footerCopyright}
         footerText={campaign?.footerText}
       />
     </>

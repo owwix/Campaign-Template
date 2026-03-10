@@ -54,5 +54,20 @@ export const Media: CollectionConfig = {
         description: 'Optional source or photographer credit.',
       },
     },
+    {
+      name: 'rotation',
+      label: 'Image Rotation',
+      type: 'select',
+      defaultValue: '0',
+      options: [
+        { label: '0° (No Rotation)', value: '0' },
+        { label: '90° Clockwise', value: '90' },
+        { label: '180°', value: '180' },
+        { label: '270° Clockwise', value: '270' },
+      ],
+      admin: {
+        description: 'Rotate this image in the frontend without re-uploading.',
+      },
+    },
   ],
 }

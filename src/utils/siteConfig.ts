@@ -18,7 +18,10 @@ const createMonogram = (value: string): string => {
 
 export const siteConfig = {
   siteUrl: normalizeUrl(env.SITE_URL || env.NEXT_PUBLIC_SITE_URL || env.PAYLOAD_PUBLIC_SERVER_URL),
-  organizationName: env.SITE_ORGANIZATION_NAME || env.NEXT_PUBLIC_SITE_ORGANIZATION_NAME || 'Law Student Association',
+  organizationName:
+    env.SITE_ORGANIZATION_NAME ||
+    env.NEXT_PUBLIC_SITE_ORGANIZATION_NAME ||
+    'University of the Pacific McGeorge School of Law',
   cmsTitle: env.CMS_TITLE || env.NEXT_PUBLIC_CMS_TITLE || 'Campaign CMS',
   cmsSubtitle: env.CMS_SUBTITLE || env.NEXT_PUBLIC_CMS_SUBTITLE || 'Election Content Control Center',
   cmsMonogram:

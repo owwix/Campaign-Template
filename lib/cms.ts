@@ -65,6 +65,7 @@ export type CampaignData = {
     text?: string
   }
   footerText?: string
+  footerCopyright?: string
   seo?: {
     metaTitle?: string
     metaDescription?: string
@@ -81,6 +82,7 @@ export type MediaField =
   | {
       url?: string
       alt?: string
+      rotation?: '0' | '90' | '180' | '270'
       filename?: string
       sizes?: {
         card?: { url?: string }
@@ -98,10 +100,18 @@ function toMediaAlt(media?: MediaField, fallback = ''): string {
   return media.alt || fallback
 }
 
-export function resolveMedia(media?: MediaField, fallbackAlt = ''): { src: string; alt: string } {
+function toRotation(media?: MediaField): number {
+  if (!media || typeof media === 'string') return 0
+  const value = Number(media.rotation || '0')
+  if (![0, 90, 180, 270].includes(value)) return 0
+  return value
+}
+
+export function resolveMedia(media?: MediaField, fallbackAlt = ''): { src: string; alt: string; rotation: number } {
   return {
     src: toMediaUrl(media),
     alt: toMediaAlt(media, fallbackAlt),
+    rotation: toRotation(media),
   }
 }
 

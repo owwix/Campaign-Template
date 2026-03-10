@@ -10,7 +10,9 @@
     "build": "npm run build:core && npm run build:payload-admin",
     "build:railway": "npm run build:core && if [ \"${SKIP_PAYLOAD_ADMIN_BUILD:-0}\" = \"1\" ]; then echo \"Skipping Payload admin build\"; else npm run build:payload-admin; fi",
     "start": "node dist/server.js",
-    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.next.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.next.json",
+    "migrate:mongo": "bash scripts/migrate-local-to-production.sh",
+    "migrate:all": "bash scripts/migrate-all-to-production.sh"
   },
   "dependencies": {
     "@payloadcms/bundler-webpack": "^1.0.9",
