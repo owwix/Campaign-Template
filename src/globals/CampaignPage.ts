@@ -21,7 +21,7 @@ export const CampaignPage: GlobalConfig = {
               label: 'Campaign Info',
               type: 'group',
               fields: [
-                { name: 'candidateName', type: 'text', required: true, defaultValue: 'Jordan Ellis' },
+                { name: 'candidateName', type: 'text', required: true, defaultValue: 'Pablo Gonzalez' },
                 { name: 'officeTitle', type: 'text', required: true, defaultValue: 'Law School President' },
                 {
                   name: 'organizationName',
