@@ -104,10 +104,21 @@ export default async function HomePage() {
       <main className="shell space-y-7 md:space-y-8" style={{ ['--accent' as string]: accentColor }}>
         {showBanner ? (
           <section
-            className="rounded-xl border border-[color:var(--brand-primary)] bg-[color:var(--brand-primary)] px-5 py-3.5 text-center text-sm font-semibold text-white shadow-sm"
+            className="relative overflow-hidden rounded-2xl border border-[color:var(--brand-primary)]/28 bg-white/78 shadow-[0_16px_44px_-28px_rgba(37,93,241,0.78)]"
             role="status"
           >
-            {campaign.announcement?.text}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_220%_at_12%_0%,rgba(37,93,241,0.16),transparent_65%),linear-gradient(100deg,rgba(37,93,241,0.02)_0%,rgba(63,124,255,0.09)_40%,rgba(255,255,255,0.24)_100%)]"
+            />
+            <div className="relative flex flex-wrap items-center justify-center gap-2.5 px-5 py-3.5 md:gap-3 md:px-6 md:py-4">
+              <span className="inline-flex items-center rounded-full border border-[color:var(--brand-primary)]/20 bg-[color:var(--brand-primary-soft)] px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[color:var(--brand-primary)]">
+                Election Update
+              </span>
+              <p className="text-center text-sm font-semibold tracking-[0.01em] text-[#122b5f] md:text-[0.98rem]">
+                {campaign.announcement?.text}
+              </p>
+            </div>
           </section>
         ) : null}
 

@@ -28,11 +28,26 @@ export default function CampaignNav({ candidateName, officeTitle, organizationNa
   const primaryMessage = rawMessage.replace(/VICE\s+PRESIDENT/gi, 'PRESIDENT')
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-[color:var(--bg)] backdrop-blur-md">
-      <div className="mx-auto w-[min(1120px,92vw)] py-3.5 md:py-4">
-        <div className="flex justify-center">
-          <div className="rounded-2xl border border-[color:var(--brand-primary)]/25 bg-gradient-to-r from-[color:var(--brand-primary)] to-[#3f7cff] px-4 py-3 text-center text-sm font-semibold tracking-[0.08em] text-white shadow-md shadow-blue-300/40 md:px-6 md:py-3.5 md:text-base md:tracking-[0.11em]">
-            {primaryMessage}
+    <header className="sticky top-0 z-40 border-b border-line/70 bg-[color:var(--bg)]/88 backdrop-blur-xl">
+      <div className="mx-auto w-[min(1120px,92vw)] py-3 md:py-4">
+        <div className="mx-auto w-full max-w-[760px]">
+          <div className="group relative overflow-hidden rounded-[1.15rem] border border-[color:var(--brand-primary)]/30 bg-white/78 shadow-[0_16px_40px_-22px_rgba(37,93,241,0.72)]">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(88%_180%_at_0%_0%,rgba(37,93,241,0.22),transparent_62%),linear-gradient(95deg,rgba(37,93,241,0.06)_0%,rgba(63,124,255,0.14)_36%,rgba(255,255,255,0.16)_100%)]"
+            />
+            <div className="relative flex items-center justify-center gap-2 border-b border-[color:var(--brand-primary)]/12 px-4 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand-primary)]/65" />
+              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-[color:var(--brand-primary)]/80">
+                Campaign Message
+              </p>
+              <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--brand-primary)]/65" />
+            </div>
+            <div className="relative px-4 py-3 text-center md:px-7 md:py-3.5">
+              <p className="text-sm font-semibold tracking-[0.02em] text-[#123171] md:text-[1.06rem] md:tracking-[0.035em]">
+                {primaryMessage}
+              </p>
+            </div>
           </div>
         </div>
       </div>

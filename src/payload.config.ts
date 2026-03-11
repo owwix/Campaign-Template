@@ -4,6 +4,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import { buildConfig } from 'payload/config'
 import { Media } from './collections/Media'
+import { VolunteerSubmissions } from './collections/VolunteerSubmissions'
 import { CampaignPage } from './globals/CampaignPage'
 import { siteConfig } from './utils/siteConfig'
 
@@ -31,6 +32,7 @@ export default buildConfig({
   },
   collections: [
     Media,
+    VolunteerSubmissions,
     {
       slug: 'users',
       labels: {
