@@ -104,18 +104,18 @@ export default async function HomePage() {
       <main className="shell space-y-7 md:space-y-8" style={{ ['--accent' as string]: accentColor }}>
         {showBanner ? (
           <section
-            className="relative overflow-hidden rounded-2xl border border-[color:var(--brand-primary)]/28 bg-white/78 shadow-[0_16px_44px_-28px_rgba(37,93,241,0.78)]"
+            className="relative overflow-hidden rounded-2xl border border-[#2b4f93]/78 bg-gradient-to-r from-[#102a56] via-[#1a3f7d] to-[#2454a8] shadow-[0_22px_56px_-24px_rgba(10,28,64,0.92)] ring-1 ring-white/18 outline outline-1 outline-[#07152e]/52 outline-offset-[2px]"
             role="status"
           >
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_220%_at_12%_0%,rgba(37,93,241,0.16),transparent_65%),linear-gradient(100deg,rgba(37,93,241,0.02)_0%,rgba(63,124,255,0.09)_40%,rgba(255,255,255,0.24)_100%)]"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(86%_220%_at_8%_0%,rgba(255,255,255,0.2),transparent_62%),linear-gradient(112deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_52%,rgba(6,14,35,0.24)_100%)]"
             />
             <div className="relative flex flex-wrap items-center justify-center gap-2.5 px-5 py-3.5 md:gap-3 md:px-6 md:py-4">
-              <span className="inline-flex items-center rounded-full border border-[color:var(--brand-primary)]/20 bg-[color:var(--brand-primary-soft)] px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[color:var(--brand-primary)]">
+              <span className="inline-flex items-center rounded-full border border-sky-200/44 bg-[#0f2a59]/46 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-sky-100/92">
                 Election Update
               </span>
-              <p className="text-center text-sm font-semibold tracking-[0.01em] text-[#122b5f] md:text-[0.98rem]">
+              <p className="text-center text-sm font-semibold tracking-[0.012em] text-white md:text-[0.98rem]">
                 {campaign.announcement?.text}
               </p>
             </div>

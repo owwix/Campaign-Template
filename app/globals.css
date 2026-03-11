@@ -28,10 +28,10 @@ body {
   min-height: 100vh;
   background-color: var(--bg);
   background-image:
-    radial-gradient(900px 560px at 8% 0%, rgba(37, 93, 241, 0.28), rgba(37, 93, 241, 0.06) 45%, transparent 72%),
-    radial-gradient(760px 460px at 92% 12%, rgba(64, 136, 255, 0.16), rgba(64, 136, 255, 0.03) 48%, transparent 72%),
-    linear-gradient(180deg, #d5e6ff 0%, #c7dcff 22%, #e4efff 50%, #f7fbff 74%, #d5e6ff 100%);
-  background-size: 100% 100%, 100% 100%, 100% 960px;
+    radial-gradient(900px 560px at 8% 0%, rgba(37, 93, 241, 0.48), rgba(37, 93, 241, 0.16) 45%, transparent 72%),
+    radial-gradient(760px 460px at 92% 12%, rgba(64, 136, 255, 0.3), rgba(64, 136, 255, 0.08) 48%, transparent 72%),
+    linear-gradient(180deg, #8eb8ff 0%, #a9ccff 24%, #d6e8ff 52%, #f3f9ff 76%, #8eb8ff 100%);
+  background-size: 100% 100%, 100% 100%, 100% 1240px;
   background-repeat: no-repeat, no-repeat, repeat-y;
   color: var(--ink);
   font-family: var(--font-sans), 'Space Grotesk', sans-serif;
