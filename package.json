@@ -13,7 +13,8 @@
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.next.json",
     "migrate:mongo": "bash scripts/migrate-local-to-production.sh",
-    "migrate:all": "bash scripts/migrate-all-to-production.sh"
+    "migrate:all": "bash scripts/migrate-all-to-production.sh",
+    "backup:mongo": "bash scripts/backup-mongodb.sh"
   },
   "dependencies": {
     "@payloadcms/bundler-webpack": "^1.0.9",

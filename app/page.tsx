@@ -1,15 +1,12 @@
 import type { Metadata } from 'next'
 import CampaignAbout from '../components/campaign/CampaignAbout'
 import CampaignContact from '../components/campaign/CampaignContact'
-import CampaignEndorsements from '../components/campaign/CampaignEndorsements'
-import CampaignEvents from '../components/campaign/CampaignEvents'
 import CampaignFAQ from '../components/campaign/CampaignFAQ'
 import CampaignFooter from '../components/campaign/CampaignFooter'
 import CampaignHero from '../components/campaign/CampaignHero'
 import CampaignNav from '../components/campaign/CampaignNav'
 import CampaignPlatform from '../components/campaign/CampaignPlatform'
 import CampaignTape from '../components/campaign/CampaignTape'
-import CampaignVision from '../components/campaign/CampaignVision'
 import { type CampaignData, fetchCampaignPage, resolveMedia } from '../lib/cms'
 import { siteConfig } from '../src/utils/siteConfig'
 
@@ -53,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: campaign?.seo?.metaTitle || `${campaign?.campaignInfo?.candidateName || 'Candidate'} for ${campaign?.campaignInfo?.officeTitle || 'Office'}`,
       description:
         campaign?.seo?.metaDescription ||
-        'Official campaign website featuring the platform, endorsements, events, and contact information.',
+        'Official campaign website featuring the platform and contact information.',
       openGraph: {
         title: campaign?.seo?.metaTitle || 'Law School Campaign',
         description: campaign?.seo?.metaDescription || 'Official campaign website.',
@@ -98,13 +95,10 @@ export default async function HomePage() {
   const showCampaignTape = isVisible(visibility.showCampaignTape)
   const showAbout = isVisible(visibility.showAbout)
   const showPlatform = isVisible(visibility.showPlatform)
-  const showVision = isVisible(visibility.showVision)
-  const showEndorsements = isVisible(visibility.showEndorsements)
-  const showEvents = isVisible(visibility.showEvents)
   const showFAQ = isVisible(visibility.showFAQ)
   const showContact = isVisible(visibility.showContact)
   const showFooter = isVisible(visibility.showFooter)
-  const hasMainSections = [showAbout, showPlatform, showVision, showEndorsements, showEvents, showFAQ, showContact].some(Boolean)
+  const hasMainSections = [showAbout, showPlatform, showFAQ, showContact].some(Boolean)
   const showSectionGradients = campaign?.theme?.showSectionGradients !== false
 
   return (
@@ -158,9 +152,6 @@ export default async function HomePage() {
           >
             {showAbout ? <CampaignAbout about={campaign?.about} /> : null}
             {showPlatform ? <CampaignPlatform platform={campaign?.platform} /> : null}
-            {showVision ? <CampaignVision vision={campaign?.vision} /> : null}
-            {showEndorsements ? <CampaignEndorsements endorsements={campaign?.endorsements} /> : null}
-            {showEvents ? <CampaignEvents events={campaign?.events} /> : null}
             {showFAQ ? <CampaignFAQ faq={campaign?.faq} /> : null}
             {showContact ? <CampaignContact contact={campaign?.contact} /> : null}
           </div>

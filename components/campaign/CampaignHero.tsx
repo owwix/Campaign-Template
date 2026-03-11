@@ -91,19 +91,6 @@ export default function CampaignHero({ campaignInfo, hero, cta }: CampaignHeroPr
             </div>
           )}
 
-          {hero?.heroStats?.length ? (
-            <div className="grid gap-2.5 min-[560px]:grid-cols-3">
-              {hero.heroStats.map((stat, index) => (
-                <div className="flex min-h-[7.75rem] flex-col justify-between rounded-xl border border-line bg-white p-3.5 shadow-sm min-[560px]:min-h-[8.1rem]" key={`${stat?.label}-${index}`}>
-                  <div className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[color:var(--brand-primary-soft)] text-[10px] font-semibold text-[color:var(--brand-primary)]">
-                    +
-                  </div>
-                  <p className="text-[1.85rem] font-semibold tracking-[-0.02em] leading-tight">{stat?.value || '--'}</p>
-                  <p className="text-[0.95rem] font-medium leading-snug text-soft">{stat?.label || 'Metric'}</p>
-                </div>
-              ))}
-            </div>
-          ) : null}
         </div>
       </div>
     </section>

@@ -60,6 +60,11 @@ npm run dev
 - `CMS_TITLE`
 - `CMS_SUBTITLE`
 - `CMS_MONOGRAM`
+- `BACKUP_MONGODB_URI` (optional, defaults to `MONGODB_URI`)
+- `BACKUP_DIR` (default `backups/mongodb`)
+- `BACKUP_FILE_PREFIX` (default `payload`)
+- `BACKUP_RETENTION_DAYS` (default `14`)
+- `BACKUP_UPLOAD_COMMAND` (optional, for offsite copy)
 
 ## Build
 
@@ -127,3 +132,49 @@ Useful flags:
 - `--media-only`: migrate media files only
 - `--delete-media`: mirror source exactly (deletes extra files on destination)
 - `--allow-local-target`: allow local DB URI destination
+
+## Automatic MongoDB Backups
+
+This repo includes an automated backup script:
+
+```bash
+npm run backup:mongo
+```
+
+Dry run:
+
+```bash
+npm run backup:mongo -- --dry-run
+```
+
+The script:
+- Creates timestamped compressed archives with `mongodump`
+- Writes checksum files (`.sha256`) when hash tools are available
+- Prunes local files older than `BACKUP_RETENTION_DAYS`
+- Can run an optional upload command for offsite storage
+
+Example upload to S3-compatible storage:
+
+```bash
+BACKUP_UPLOAD_COMMAND='aws s3 cp "$BACKUP_FILE_PATH" "s3://my-backup-bucket/mongo/$BACKUP_FILE_NAME"' \
+npm run backup:mongo
+```
+
+### Railway Scheduler Setup
+
+1. Add backup environment variables to your Railway production service:
+   - `BACKUP_MONGODB_URI=${{MONGODB_URI}}` (or explicit production URI)
+   - `BACKUP_RETENTION_DAYS=14`
+   - `BACKUP_UPLOAD_COMMAND=...` (recommended for offsite backups)
+2. Create a Railway Cron/Scheduled Job in production.
+3. Set command to:
+
+```bash
+npm run backup:mongo
+```
+
+4. Choose frequency (common default: daily at off-peak hours).
+
+Important:
+- Keep at least one offsite target (`BACKUP_UPLOAD_COMMAND`) so backups survive container restarts.
+- Ensure `mongodump` is available in your runtime image.
