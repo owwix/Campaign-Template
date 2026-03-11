@@ -83,6 +83,20 @@ export type CampaignData = {
     enabled?: boolean
     text?: string
   }
+  sectionVisibility?: {
+    showHeader?: boolean
+    showAnnouncement?: boolean
+    showHero?: boolean
+    showCampaignTape?: boolean
+    showAbout?: boolean
+    showPlatform?: boolean
+    showVision?: boolean
+    showEndorsements?: boolean
+    showEvents?: boolean
+    showFAQ?: boolean
+    showContact?: boolean
+    showFooter?: boolean
+  }
   footerText?: string
   footerCopyright?: string
   seo?: {

@@ -89,20 +89,37 @@ export default async function HomePage() {
     legacyAccent === '#af8a54' || legacyAccent === '#9f7a46'
       ? '#3A76F8'
       : campaign?.theme?.accentColor || '#3A76F8'
-  const showBanner = campaign?.announcement?.enabled !== false && campaign?.announcement?.text
+  const visibility = campaign?.sectionVisibility || {}
+  const isVisible = (value?: boolean) => value !== false
+  const showHeader = isVisible(visibility.showHeader)
+  const showAnnouncement =
+    isVisible(visibility.showAnnouncement) && campaign?.announcement?.enabled !== false && Boolean(campaign?.announcement?.text)
+  const showHero = isVisible(visibility.showHero)
+  const showCampaignTape = isVisible(visibility.showCampaignTape)
+  const showAbout = isVisible(visibility.showAbout)
+  const showPlatform = isVisible(visibility.showPlatform)
+  const showVision = isVisible(visibility.showVision)
+  const showEndorsements = isVisible(visibility.showEndorsements)
+  const showEvents = isVisible(visibility.showEvents)
+  const showFAQ = isVisible(visibility.showFAQ)
+  const showContact = isVisible(visibility.showContact)
+  const showFooter = isVisible(visibility.showFooter)
+  const hasMainSections = [showAbout, showPlatform, showVision, showEndorsements, showEvents, showFAQ, showContact].some(Boolean)
   const showSectionGradients = campaign?.theme?.showSectionGradients !== false
 
   return (
     <>
-      <CampaignNav
-        candidateName={campaign?.campaignInfo?.candidateName}
-        header={campaign?.header}
-        organizationName={campaign?.campaignInfo?.organizationName}
-        officeTitle={campaign?.campaignInfo?.officeTitle}
-      />
+      {showHeader ? (
+        <CampaignNav
+          candidateName={campaign?.campaignInfo?.candidateName}
+          header={campaign?.header}
+          organizationName={campaign?.campaignInfo?.organizationName}
+          officeTitle={campaign?.campaignInfo?.officeTitle}
+        />
+      ) : null}
 
       <main className="shell space-y-7 md:space-y-8" style={{ ['--accent' as string]: accentColor }}>
-        {showBanner ? (
+        {showAnnouncement ? (
           <section
             className="relative overflow-hidden rounded-2xl border border-[#2b4f93]/78 bg-gradient-to-r from-[#102a56] via-[#1a3f7d] to-[#2454a8] shadow-[0_22px_56px_-24px_rgba(10,28,64,0.92)] ring-1 ring-white/18 outline outline-1 outline-[#07152e]/52 outline-offset-[2px]"
             role="status"
@@ -122,37 +139,41 @@ export default async function HomePage() {
           </section>
         ) : null}
 
-        <CampaignHero campaignInfo={campaign?.campaignInfo} cta={campaign?.campaignCta} hero={campaign?.hero} />
-        <CampaignTape tape={campaign?.campaignTape} />
+        {showHero ? <CampaignHero campaignInfo={campaign?.campaignInfo} cta={campaign?.campaignCta} hero={campaign?.hero} /> : null}
+        {showCampaignTape ? <CampaignTape tape={campaign?.campaignTape} /> : null}
 
-        <div
-          className="space-y-6"
-          style={
-            showSectionGradients
-              ? {
-                  background:
-                    'linear-gradient(180deg, rgba(37,93,241,0.1) 0%, rgba(237,244,255,0.2) 36%, rgba(255,255,255,0.78) 100%)',
-                  borderRadius: '1rem',
-                  padding: '0.35rem',
-                }
-              : undefined
-          }
-        >
-          <CampaignAbout about={campaign?.about} />
-          <CampaignPlatform platform={campaign?.platform} />
-          <CampaignVision vision={campaign?.vision} />
-          <CampaignEndorsements endorsements={campaign?.endorsements} />
-          <CampaignEvents events={campaign?.events} />
-          <CampaignFAQ faq={campaign?.faq} />
-          <CampaignContact contact={campaign?.contact} />
-        </div>
+        {hasMainSections ? (
+          <div
+            className="space-y-6"
+            style={
+              showSectionGradients
+                ? {
+                    background:
+                      'linear-gradient(180deg, rgba(37,93,241,0.1) 0%, rgba(237,244,255,0.2) 36%, rgba(255,255,255,0.78) 100%)',
+                    borderRadius: '1rem',
+                    padding: '0.35rem',
+                  }
+                : undefined
+            }
+          >
+            {showAbout ? <CampaignAbout about={campaign?.about} /> : null}
+            {showPlatform ? <CampaignPlatform platform={campaign?.platform} /> : null}
+            {showVision ? <CampaignVision vision={campaign?.vision} /> : null}
+            {showEndorsements ? <CampaignEndorsements endorsements={campaign?.endorsements} /> : null}
+            {showEvents ? <CampaignEvents events={campaign?.events} /> : null}
+            {showFAQ ? <CampaignFAQ faq={campaign?.faq} /> : null}
+            {showContact ? <CampaignContact contact={campaign?.contact} /> : null}
+          </div>
+        ) : null}
       </main>
 
-      <CampaignFooter
-        candidateName={campaign?.campaignInfo?.candidateName}
-        footerCopyright={campaign?.footerCopyright}
-        footerText={campaign?.footerText}
-      />
+      {showFooter ? (
+        <CampaignFooter
+          candidateName={campaign?.campaignInfo?.candidateName}
+          footerCopyright={campaign?.footerCopyright}
+          footerText={campaign?.footerText}
+        />
+      ) : null}
     </>
   )
 }

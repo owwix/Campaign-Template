@@ -498,6 +498,30 @@ export const CampaignPage: GlobalConfig = {
           ],
         },
         {
+          label: 'Visibility',
+          fields: [
+            {
+              name: 'sectionVisibility',
+              label: 'Section Visibility',
+              type: 'group',
+              fields: [
+                { name: 'showHeader', type: 'checkbox', defaultValue: true, label: 'Show Header Message' },
+                { name: 'showAnnouncement', type: 'checkbox', defaultValue: true, label: 'Show Election Update' },
+                { name: 'showHero', type: 'checkbox', defaultValue: true, label: 'Show Hero Section' },
+                { name: 'showCampaignTape', type: 'checkbox', defaultValue: true, label: 'Show Campaign Tape' },
+                { name: 'showAbout', type: 'checkbox', defaultValue: true, label: 'Show About Section' },
+                { name: 'showPlatform', type: 'checkbox', defaultValue: true, label: 'Show Platform Section' },
+                { name: 'showVision', type: 'checkbox', defaultValue: true, label: 'Show Vision Section' },
+                { name: 'showEndorsements', type: 'checkbox', defaultValue: true, label: 'Show Endorsements Section' },
+                { name: 'showEvents', type: 'checkbox', defaultValue: true, label: 'Show Events Section' },
+                { name: 'showFAQ', type: 'checkbox', defaultValue: true, label: 'Show FAQ Section' },
+                { name: 'showContact', type: 'checkbox', defaultValue: true, label: 'Show Contact Section' },
+                { name: 'showFooter', type: 'checkbox', defaultValue: true, label: 'Show Footer' },
+              ],
+            },
+          ],
+        },
+        {
           label: 'Footer',
           fields: [
             {
