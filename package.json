@@ -4,7 +4,8 @@
   "private": true,
   "description": "Law school election campaign starter powered by Payload CMS",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "npm run dev:clean && tsx watch --exclude .next --exclude dist --exclude build --no-cache src/server.ts",
+    "dev:clean": "rm -rf .next build dist",
     "build:core": "next build && tsc -p tsconfig.server.json",
     "build:payload-admin": "PAYLOAD_CONFIG_PATH=dist/payload.config.js payload build",
     "build": "npm run build:core && npm run build:payload-admin",

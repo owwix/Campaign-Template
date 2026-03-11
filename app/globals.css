@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg: #f4f1ee;
-  --surface: #fcfbf9;
-  --surface-strong: #f6f0e8;
-  --ink: #17181a;
-  --ink-soft: #55585e;
-  --line: #d8cdc1;
-  --accent: #af8a54;
-  --brand-primary: #682334;
-  --brand-primary-strong: #531a28;
-  --brand-primary-soft: #f2e8eb;
+  --bg: #edf4ff;
+  --surface: #ffffff;
+  --surface-strong: #edf4ff;
+  --ink: #121827;
+  --ink-soft: #4a556b;
+  --line: #c7d8f4;
+  --accent: #3a76f8;
+  --brand-primary: #255df1;
+  --brand-primary-strong: #1a47c2;
+  --brand-primary-soft: #e5eeff;
 }
 
 * {
@@ -26,10 +26,13 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(1100px 560px at 0% 0%, rgba(104, 35, 52, 0.12), transparent 62%),
-    radial-gradient(900px 480px at 100% 100%, rgba(175, 138, 84, 0.14), transparent 58%),
-    var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(900px 560px at 8% 0%, rgba(37, 93, 241, 0.28), rgba(37, 93, 241, 0.06) 45%, transparent 72%),
+    radial-gradient(760px 460px at 92% 12%, rgba(64, 136, 255, 0.16), rgba(64, 136, 255, 0.03) 48%, transparent 72%),
+    linear-gradient(180deg, #d5e6ff 0%, #c7dcff 22%, #e4efff 50%, #f7fbff 74%, #d5e6ff 100%);
+  background-size: 100% 100%, 100% 100%, 100% 960px;
+  background-repeat: no-repeat, no-repeat, repeat-y;
   color: var(--ink);
   font-family: var(--font-sans), 'Space Grotesk', sans-serif;
   line-height: 1.58;
@@ -45,7 +48,100 @@ p {
 
 a {
   color: inherit;
-  -webkit-tap-highlight-color: rgba(104, 35, 52, 0.12);
+  -webkit-tap-highlight-color: rgba(37, 93, 241, 0.16);
+}
+
+@keyframes campaignTapeScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.campaign-tape {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  overflow: hidden;
+  margin-top: var(--tape-top, 8px);
+  margin-bottom: var(--tape-bottom, 22px);
+}
+
+.campaign-tape__slant {
+  transform: rotate(var(--tape-angle, -2deg));
+  transform-origin: center;
+}
+
+.campaign-tape__surface {
+  display: block;
+  background: var(--tape-bg, var(--brand-primary));
+  color: var(--tape-text, #ffffff);
+  box-shadow: 0 14px 32px rgba(29, 78, 216, 0.24);
+  padding-block: 0.95rem;
+  text-decoration: none;
+}
+
+.campaign-tape__surface--link {
+  transition: filter 180ms ease;
+}
+
+.campaign-tape__surface--link:hover {
+  filter: brightness(1.06);
+}
+
+.campaign-tape__surface--link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: -4px;
+}
+
+.campaign-tape__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: campaignTapeScroll var(--tape-speed, 26s) linear infinite;
+}
+
+.campaign-tape__group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.campaign-tape__phrase {
+  display: block;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding-inline: 2.2rem;
+  font-size: clamp(1rem, 2.3vw, 1.42rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .campaign-tape__surface {
+    padding-block: 0.8rem;
+  }
+
+  .campaign-tape__phrase {
+    padding-inline: 1.45rem;
+    font-size: clamp(0.9rem, 4.4vw, 1.08rem);
+    letter-spacing: 0.075em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campaign-tape__track {
+    animation: none;
+    transform: none;
+  }
+
+  .campaign-tape__slant {
+    transform: none;
+  }
 }
 
 @layer components {

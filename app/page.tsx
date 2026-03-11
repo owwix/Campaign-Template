@@ -8,6 +8,7 @@ import CampaignFooter from '../components/campaign/CampaignFooter'
 import CampaignHero from '../components/campaign/CampaignHero'
 import CampaignNav from '../components/campaign/CampaignNav'
 import CampaignPlatform from '../components/campaign/CampaignPlatform'
+import CampaignTape from '../components/campaign/CampaignTape'
 import CampaignVision from '../components/campaign/CampaignVision'
 import { type CampaignData, fetchCampaignPage, resolveMedia } from '../lib/cms'
 import { siteConfig } from '../src/utils/siteConfig'
@@ -20,6 +21,20 @@ const fallbackData: CampaignData = {
     officeTitle: 'Law School President',
     organizationName: 'University of the Pacific McGeorge School of Law',
     slogan: 'Practical Leadership. Transparent Advocacy. Student-First Results.',
+  },
+  header: {
+    message: 'VOTE {{candidateName}} FOR PRESIDENT',
+    ctaLabel: 'Support {{firstName}}',
+    ctaHref: '#contact',
+  },
+  campaignTape: {
+    enabled: true,
+    tapeText: 'VOTE PABLO GONZALES FOR VICE PRESIDENT',
+    themeVariant: 'brand',
+    speed: 26,
+    angle: -2,
+    topSpacing: 8,
+    bottomSpacing: 22,
   },
   hero: {
     heroBadge: '2026 Student Bar Association Election',
@@ -69,7 +84,11 @@ export default async function HomePage() {
     console.error(error)
   }
 
-  const accentColor = campaign?.theme?.accentColor || '#AF8A54'
+  const legacyAccent = (campaign?.theme?.accentColor || '').toLowerCase()
+  const accentColor =
+    legacyAccent === '#af8a54' || legacyAccent === '#9f7a46'
+      ? '#3A76F8'
+      : campaign?.theme?.accentColor || '#3A76F8'
   const showBanner = campaign?.announcement?.enabled !== false && campaign?.announcement?.text
   const showSectionGradients = campaign?.theme?.showSectionGradients !== false
 
@@ -77,6 +96,7 @@ export default async function HomePage() {
     <>
       <CampaignNav
         candidateName={campaign?.campaignInfo?.candidateName}
+        header={campaign?.header}
         organizationName={campaign?.campaignInfo?.organizationName}
         officeTitle={campaign?.campaignInfo?.officeTitle}
       />
@@ -92,6 +112,7 @@ export default async function HomePage() {
         ) : null}
 
         <CampaignHero campaignInfo={campaign?.campaignInfo} cta={campaign?.campaignCta} hero={campaign?.hero} />
+        <CampaignTape tape={campaign?.campaignTape} />
 
         <div
           className="space-y-6"
@@ -99,7 +120,7 @@ export default async function HomePage() {
             showSectionGradients
               ? {
                   background:
-                    'linear-gradient(180deg, rgba(104,35,52,0.07) 0%, rgba(244,241,238,0) 30%, rgba(175,138,84,0.1) 100%)',
+                    'linear-gradient(180deg, rgba(37,93,241,0.1) 0%, rgba(237,244,255,0.2) 36%, rgba(255,255,255,0.78) 100%)',
                   borderRadius: '1rem',
                   padding: '0.35rem',
                 }

@@ -34,6 +34,38 @@ export const CampaignPage: GlobalConfig = {
               ],
             },
             {
+              name: 'header',
+              label: 'Header',
+              type: 'group',
+              fields: [
+                {
+                  name: 'message',
+                  type: 'text',
+                  defaultValue: 'VOTE {{candidateName}} FOR PRESIDENT',
+                  admin: {
+                    description:
+                      'Main center banner message. Supports {{candidateName}}, {{firstName}}, {{officeTitle}}, and {{organizationName}}.',
+                  },
+                },
+                {
+                  name: 'ctaLabel',
+                  type: 'text',
+                  defaultValue: 'Support {{firstName}}',
+                  admin: {
+                    description: 'Right-side header button label. Supports the same tokens.',
+                  },
+                },
+                {
+                  name: 'ctaHref',
+                  type: 'text',
+                  defaultValue: '#contact',
+                  admin: {
+                    description: 'Right-side header button link (anchor or full URL).',
+                  },
+                },
+              ],
+            },
+            {
               name: 'announcement',
               label: 'Announcement Banner',
               type: 'group',
@@ -103,6 +135,125 @@ export const CampaignPage: GlobalConfig = {
                     { name: 'label', type: 'text', required: true },
                     { name: 'value', type: 'text', required: true },
                   ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Campaign Tape',
+          fields: [
+            {
+              name: 'campaignTape',
+              label: 'Campaign Tape',
+              type: 'group',
+              fields: [
+                {
+                  name: 'enabled',
+                  type: 'checkbox',
+                  defaultValue: true,
+                },
+                {
+                  name: 'tapeText',
+                  type: 'text',
+                  required: true,
+                  defaultValue: 'VOTE PABLO GONZALES FOR VICE PRESIDENT',
+                },
+                {
+                  name: 'repeatedText',
+                  type: 'text',
+                  admin: {
+                    description:
+                      'Optional visual override for each repeated unit (for example "VOTE PABLO GONZALES •"). Leave blank to auto-repeat tape text.',
+                  },
+                },
+                {
+                  name: 'themeVariant',
+                  type: 'select',
+                  defaultValue: 'brand',
+                  options: [
+                    { label: 'Brand Blue', value: 'brand' },
+                    { label: 'Dark Ink', value: 'dark' },
+                    { label: 'Sky Light', value: 'light' },
+                    { label: 'Custom Colors', value: 'custom' },
+                  ],
+                },
+                {
+                  name: 'backgroundColor',
+                  type: 'text',
+                  defaultValue: '#255DF1',
+                  admin: {
+                    description: 'Hex color used when theme variant is Custom Colors (example: #255DF1).',
+                    condition: (_, siblingData) => siblingData?.themeVariant === 'custom',
+                  },
+                },
+                {
+                  name: 'textColor',
+                  type: 'text',
+                  defaultValue: '#FFFFFF',
+                  admin: {
+                    description: 'Hex color used when theme variant is Custom Colors (example: #FFFFFF).',
+                    condition: (_, siblingData) => siblingData?.themeVariant === 'custom',
+                  },
+                },
+                {
+                  name: 'speed',
+                  type: 'number',
+                  defaultValue: 26,
+                  min: 8,
+                  max: 90,
+                  admin: {
+                    step: 1,
+                    description: 'Marquee duration in seconds. Lower value = faster movement.',
+                  },
+                },
+                {
+                  name: 'angle',
+                  type: 'number',
+                  defaultValue: -2,
+                  min: -10,
+                  max: 10,
+                  admin: {
+                    step: 0.5,
+                    description: 'Tape slant angle in degrees. Use 0 for a straight band.',
+                  },
+                },
+                {
+                  name: 'linkHref',
+                  type: 'text',
+                  admin: {
+                    description: 'Optional link target (anchor like #contact or full URL).',
+                  },
+                },
+                {
+                  name: 'linkLabel',
+                  type: 'text',
+                  defaultValue: 'Learn more about this campaign',
+                  admin: {
+                    description: 'Accessible label used when link URL is set.',
+                  },
+                },
+                {
+                  name: 'topSpacing',
+                  type: 'number',
+                  defaultValue: 8,
+                  min: 0,
+                  max: 120,
+                  admin: {
+                    step: 1,
+                    description: 'Space above tape in pixels.',
+                  },
+                },
+                {
+                  name: 'bottomSpacing',
+                  type: 'number',
+                  defaultValue: 22,
+                  min: 0,
+                  max: 120,
+                  admin: {
+                    step: 1,
+                    description: 'Space below tape in pixels.',
+                  },
                 },
               ],
             },

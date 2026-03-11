@@ -11,6 +11,25 @@ export type CampaignData = {
     electionDate?: string
     slogan?: string
   }
+  header?: {
+    message?: string
+    ctaLabel?: string
+    ctaHref?: string
+  }
+  campaignTape?: {
+    enabled?: boolean
+    tapeText?: string
+    repeatedText?: string
+    themeVariant?: 'brand' | 'dark' | 'light' | 'custom'
+    backgroundColor?: string
+    textColor?: string
+    speed?: number
+    angle?: number
+    linkHref?: string
+    linkLabel?: string
+    topSpacing?: number
+    bottomSpacing?: number
+  }
   hero?: {
     heroBadge?: string
     heroHeadline?: string
