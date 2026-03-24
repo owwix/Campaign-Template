@@ -63,7 +63,7 @@ export default function CampaignContact({ contact }: CampaignContactProps) {
 
   return (
     <section className="section" id="contact">
-      <p className="eyebrow">Get Involved</p>
+      <p className="eyebrow" />
       <h2 className="section-title mt-3">{contact?.contactTitle || 'Get Involved'}</h2>
       <p className="section-subtitle">{contact?.contactBody || 'Volunteer, share ideas, and support the campaign.'}</p>
 
