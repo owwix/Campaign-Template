@@ -92,7 +92,7 @@ export default function CampaignContact({ contact }: CampaignContactProps) {
           />
 
           <label className="block text-sm font-medium" htmlFor="interest">
-            How would you like to help?
+            How can I help you?
           </label>
           <textarea
             className="min-h-28 w-full rounded-lg border border-line bg-white px-3 py-2 text-sm outline-none transition focus:border-[color:var(--accent)]"
@@ -103,7 +103,7 @@ export default function CampaignContact({ contact }: CampaignContactProps) {
           />
 
           <button className="button-primary w-full disabled:cursor-not-allowed disabled:opacity-70" disabled={submitState === 'submitting'} type="submit">
-            {submitState === 'submitting' ? 'Submitting...' : 'Submit Volunteer Interest'}
+            {submitState === 'submitting' ? 'Submitting...' : 'Submit Concerns'}
           </button>
 
           {submitState === 'success' ? (
